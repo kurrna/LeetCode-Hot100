@@ -1,0 +1,22 @@
+# 忽略编译生成的文件
+dist/
+build/
+target/
+
+# 忽略日志文件
+*.log
+
+# 忽略IDE/编辑器自动生成的配置
+.idea/
+.vscode/
+*.iml
+
+# 忽略本地配置文件（如数据库连接信息）
+config.local.json
+.env
+
+# 忽略操作系统生成的文件
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+*.exe
