@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "twoSum.h"
+#include "leetcode.h"
 
 // 测试用例函数
-void test_twoSum()
+void test()
 {
     printf("==== 测试两数之和 ====\n");
     int nums[] = {2, 7, 11, 15};
@@ -26,8 +26,7 @@ void test_twoSum()
 int main()
 {
     // 运行所有测试用例
-    test_twoSum();
-    // printf("hello world\n");
+    test();
 
     return 0;
 }
