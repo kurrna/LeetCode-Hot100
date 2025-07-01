@@ -78,8 +78,8 @@ char ***groupAnagrams(char **strs, int strsSize, int *returnSize, int **returnCo
 
 // 测试用例函数
 void test() {
-    char *strs[] = {"", ""};
-    int strsSize = 2;
+    char *strs[] = {"ate", "eat", "bat", "tan", "nat", "ate"};
+    int strsSize = 6;
     int returnSize;
     int *returnColumnSizes;
     char ***result = groupAnagrams(strs, strsSize, &returnSize, &returnColumnSizes);

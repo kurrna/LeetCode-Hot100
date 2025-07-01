@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#include "groupAnagrams"
+// #include "finished/twoSum.c"
+// #include "finished/groupAnagrams.c"
 
 int main()
 {
     test();
-
     return 0;
 }
