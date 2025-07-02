@@ -2,8 +2,9 @@
 
 // #include "finished/twoSum.c"
 // #include "finished/groupAnagrams.c"
+#include "longestConsecutive.c"
 
 int main() {
-  test();
-  return 0;
+	test();
+	return 0;
 }
