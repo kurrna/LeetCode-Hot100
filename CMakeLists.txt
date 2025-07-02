@@ -3,6 +3,6 @@ project(hot100 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(hot100
-    finished/*.c
-    *.c)
+file(GLOB SRC_FILES CONFIGURE_DEPENDS "${PROJECT_SOURCE_DIR}/*.c")
+
+add_executable(main.exe ${SRC_FILES})

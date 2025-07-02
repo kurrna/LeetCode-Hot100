@@ -2,9 +2,11 @@
 
 ## 一、刷题计划简介
 
-[LeetCode 热题 100](https://leetcode.cn/studyplan/top-100-liked/) 包含平台上最受用户欢迎的经典题目，覆盖多种算法和数据结构，适合系统提升编程能力。以下是我的刷题进度跟踪：
+[LeetCode 热题 100](https://leetcode.cn/studyplan/top-100-liked/) 包含平台上最受用户欢迎的经典题目，覆盖多种算法和数据结构，适合系统提升编程能力。以下是我的刷题进度跟踪
 
 ## 二、题目分类与进度表
+
+https://github.com/KurnaX/LeetCode-Hot100
 
 ### （一）哈希
 
