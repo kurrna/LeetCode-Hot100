@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -16,13 +17,28 @@ typedef struct {
 HashTable *createHashTable(const int capacity) {
     HashTable *ht = (HashTable *) malloc(sizeof(HashTable));
     ht->capacity = capacity;
-    ht->table = (HashNode **) malloc(capacity * sizeof(HashNode *));
+    ht->table = (HashNode **) calloc(capacity, sizeof(HashNode *));
     return ht;
 }
 
-int hash(int key, const int capacity) {
-    if (key < 0) key = -key;
-    return key % capacity;
+// 哈希函数 - 改进版，确保负数和正数有不同的哈希值
+int hash(int key, int capacity) {
+    unsigned int ukey;
+
+    if (key < 0) {
+        // 对于负数，使用特殊处理使其哈希值与对应的正数不同
+        // 将符号位作为哈希计算的一部分
+        ukey = (unsigned int)(-key) | 0x80000000; // 设置最高位为1表示负数
+    } else {
+        ukey = (unsigned int)key;
+    }
+
+    // 使用更优的哈希算法减少冲突
+    ukey = ((ukey >> 16) ^ ukey) * 0x45d9f3b;
+    ukey = ((ukey >> 16) ^ ukey) * 0x45d9f3b;
+    ukey = (ukey >> 16) ^ ukey;
+
+    return ukey % capacity;
 }
 
 void insert(const HashTable *ht, const int key) {
@@ -59,7 +75,7 @@ int find(const HashTable *ht, const int x) {
 void unionSets(HashTable *ht, int x, int y) {
     int rootX = find(ht, x);
     int rootY = find(ht, y);
-    if (rootX == -1 || rootY == -1 || rootX == rootY) {
+    if (rootX == rootY) {
         return;
     }
     HashNode *nodeX = findKey(ht, rootX);
