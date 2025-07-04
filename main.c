@@ -1,6 +1,4 @@
-// #include "twoSum.c"
-// #include "groupAnagrams.c"
-#include "inorderTraversal.c"
+#include "twoSum_hash.c"
 
 int main() {
 	test();
