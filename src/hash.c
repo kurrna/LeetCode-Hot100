@@ -116,7 +116,6 @@ int defaultHashCode(HashMap hashMap, void *key) {
 
 void defaultPut(HashMap hashMap, void *key, void *value) {
     if (hashMap->autoAssign && hashMap->size >= hashMap->listSize) {
-
         // 内存扩充至原来的两倍
         // *注: 扩充时考虑的是当前存储元素数量与存储空间的大小关系，而不是存储空间是否已经存满，
         // 例如: 存储空间为10，存入了10个键值对，但是全部冲突了，所以存储空间空着9个，其余的全部挂在一个上面，
@@ -134,7 +133,6 @@ void defaultPut(HashMap hashMap, void *key, void *value) {
         hashMap->list[index].value = value;
     }
     else {
-
         Entry current = &hashMap->list[index];
         while (current != NULL) {
             if (hashMap->equal(key, current->key)) {
@@ -385,30 +383,4 @@ HashMapIterator nextHashMapIterator(HashMapIterator iterator) {
 void freeHashMapIterator(HashMapIterator * iterator) {
     free(*iterator);
     *iterator = NULL;
-}
-
-void test() {
-    HashMap map = createHashMap(NULL, NULL);
-    map->put(map, "asdfasdf", "asdfasdfds");
-    map->put(map, "sasdasd", "asdfasdfds");
-    map->put(map, "asdhfgh", "asdfasdfds");
-    map->put(map, "4545", "asdfasdfds");
-    map->put(map, "asdfaasdasdsdf", "asdfasdfds");
-    map->put(map, "asdasg", "asdfasdfds");
-    map->put(map, "qweqeqwe", "asdfasdfds");
-
-    printf("key: asdfasdf, exists: %s\n", map->exists(map, "asdfasdf") ? "true" : "false");
-    printf("4545: %s\n", (char *)map->get(map, "4545"));
-    printf("remove 4545 %s\n", map->remove(map, "4545") ? "true" : "false");
-    printf("remove 4545 %s\n", map->remove(map, "4545") ? "true" : "false");
-    printf("key: 4545, exists: %s\n", map->exists(map, "4545") ? "true" : "false");
-
-    HashMapIterator iterator = createHashMapIterator(map);
-    while (hasNextHashMapIterator(iterator)) {
-        iterator = nextHashMapIterator(iterator);
-        printf("{ key: %s, key: %s, hashcode: %d }\n",
-            (char *)iterator->entry->key, (char *)iterator->entry->value, iterator->hashCode);
-    }
-    map->clear(map);
-    freeHashMapIterator(&iterator);
 }

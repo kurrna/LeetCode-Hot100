@@ -1,4 +1,5 @@
-#include "maxArea.c"
+void test();
+void test_twoSum();
 
 int main() {
 	test();
