@@ -384,3 +384,274 @@ void freeHashMapIterator(HashMapIterator * iterator) {
     free(*iterator);
     *iterator = NULL;
 }
+
+/*
+typedef struct entry {
+    void *key;
+    int value;
+    struct entry *next;
+} *Entry;
+
+typedef struct map {
+    int size; // 当前大小
+    int listSize; // 有效空间大小
+    Entry list;
+} *HashMap;
+
+typedef struct hashMapIterator {
+    Entry entry;
+    int count; // 迭代次数
+    int index;
+    HashMap map;
+} *HashMapIterator;
+
+void put(HashMap map, void *key, int value);
+
+bool exists(HashMap map, void *key);
+
+int get(HashMap map, void *key);
+
+bool remove(HashMap map, void *key);
+
+bool equals(HashMap map, const int *key1, const int *key2);
+
+void clear(HashMap map);
+
+HashMap createHashMap() {
+    HashMap ret = malloc(sizeof(struct map));
+    ret->size = 0;
+    ret->listSize = 8;
+    ret->list = malloc(8 * sizeof(struct entry));
+    for (int i = 0; i < ret->listSize; i++) {
+        ret->list[i].key = NULL, ret->list[i].value = 0, ret->list[i].next = NULL;
+    }
+    return ret;
+}
+
+#define createHashMap() \
+    ({\
+        HashMap map = malloc(sizeof(struct map)); \
+        map->size = 0; \
+        map->listSize = 8; \
+        map->list = malloc(8 * sizeof(struct entry)); \
+        for (int i = 0; i < map->listSize; i++) { \
+            map->list[i].key = NULL, map->list[i].value = 0, map->list[i].next = NULL; \
+        }; \
+        map; \
+    })
+
+
+HashMapIterator createHashMapIterator(HashMap map) {
+    HashMapIterator ret = malloc(sizeof(struct hashMapIterator));
+    ret->entry = NULL;
+    ret->count = 0;
+    ret->index = 0;
+    ret->map = map;
+    return ret;
+}
+
+bool hasNext(HashMapIterator iterator) {
+    return iterator->count <= iterator->map->size ? true : false;
+}
+
+HashMapIterator next(HashMapIterator iterator) {
+    if (iterator->entry != NULL && iterator->entry->next != NULL) {
+        // 同一哈希桶
+        iterator->count++;
+        iterator->entry = iterator->entry->next;
+        return iterator;
+    }
+    while (++(iterator->index) < iterator->map->listSize) {
+        Entry entry = &iterator->map->list[iterator->index];
+        if (entry->key != NULL) {
+            iterator->count++;
+            iterator->entry = entry;
+            return iterator;
+        }
+    }
+    return iterator;
+}
+
+void freeHashMapIterator(HashMapIterator *iterator) {
+    free(*iterator);
+    *iterator = NULL;
+}
+
+void resetHashMap(HashMap map, int listSize) {
+    if (listSize < 8) return;
+
+    Entry tempList = malloc(map->size * sizeof(struct entry));
+
+    HashMapIterator iterator = malloc(sizeof(struct hashMapIterator));
+    iterator->entry = NULL;
+    iterator->count = 0;
+    iterator->index = 0;
+    iterator->map = map;
+    int length = map->size;
+    for (int index = 0; hasNext(iterator); index++) {
+        // 迭代取出所有键值对
+        iterator = next(iterator);
+        tempList[index].key = iterator->entry->key;
+        tempList[index].value = iterator->entry->value;
+        tempList[index].next = NULL;
+    }
+    freeHashMapIterator(&iterator);
+
+    map->size = 0;
+    for (int i = 0; i < map->listSize; i++) {
+        Entry current = &map->list[i];
+        current->key = NULL;
+        current->value = 0;
+        if (current->next != NULL) {
+            while (current->next != NULL) {
+                Entry temp = current->next->next;
+                free(current->next);
+                current->next = temp;
+            }
+        }
+    }
+
+    map->listSize = listSize;
+    Entry relist = realloc(map->list, map->listSize * sizeof(struct entry));
+    if (relist != NULL) {
+        map->list = relist;
+        free(relist);
+        relist = NULL;
+    }
+
+    for (int i = 0; i < map->listSize; i++) {
+        map->list[i].key = NULL;
+        map->list[i].value = 0;
+        map->list[i].next = NULL;
+    }
+
+    for (int i = 0; i < length; i++) {
+        put(map, tempList[i].key, tempList[i].value);
+    }
+    free(tempList);
+}
+
+int hashCode(HashMap map, void *key) {
+    char *k = (char *) key;
+    unsigned long h = 0;
+    while (*k) {
+        h = (h << 4) + *k++;
+        unsigned long g = h & 0xF0000000L;
+        if (g) {
+            h ^= g >> 24;
+        }
+        h &= ~g;
+    }
+    return h % map->listSize;
+}
+
+void put(HashMap map, void *key, int value) {
+    if (map->size >= map->listSize) {
+        resetHashMap(map, map->listSize * 2);
+    }
+    const int index = hashCode(map, key);
+    if (map->list[index].key == NULL) {
+        map->list[index].key = key;
+        map->list[index].value = value;
+        map->size++;
+    } else {
+        // 发生哈希冲突
+        Entry temp = &map->list[index];
+        while (temp != NULL) {
+            if (equals(map, temp->key, key)) {
+                temp->value = value;
+                return;
+            }
+            temp = temp->next;
+        }
+        Entry entry = malloc(sizeof(struct entry));
+        entry->key = key;
+        entry->value = value;
+        entry->next = map->list[index].next;
+        map->list[index].next = entry;
+        map->size++;
+    }
+}
+
+bool exists(HashMap map, void *key) {
+    int index = hashCode(map, key);
+    Entry entry = &map->list[index];
+    if (entry->key == NULL) return false;
+    while (entry != NULL) {
+        if (equals(map, entry->key, key)) return true;
+        entry = entry->next;
+    }
+    return false;
+}
+
+int get(HashMap map, void *key) {
+    int index = hashCode(map, key);
+    Entry entry = &map->list[index];
+    while (entry != NULL) {
+        if (equals(map, entry->key, key)) return entry->value;
+        entry = entry->next;
+    }
+    return -1;
+}
+
+bool remove(HashMap map, void *key) {
+    int index = hashCode(map, key);
+    Entry entry = &map->list[index];
+    if (entry->key == NULL) return false;
+    bool res = false;
+    if (equals(map, entry->key, key)) {
+        map->size--;
+        if (entry->next != NULL) {
+            Entry temp = entry->next;
+            entry->key = temp->key, entry->value = temp->value;
+            entry->next = temp->next;
+        } else {
+            entry->key = NULL, entry->value = 0;
+        }
+        res = true;
+    } else {
+        Entry prev = entry;
+        entry = entry->next;
+        while (entry != NULL) {
+            if (equals(map, entry->key, key)) {
+                map->size--;
+                prev->next = entry->next;
+                free(entry);
+                res = true;
+                break;
+            }
+            prev = entry;
+            entry = entry->next;
+        }
+    }
+    if (res && map->size <= map->listSize / 2) {
+        resetHashMap(map, map->listSize / 2);
+    }
+    return res;
+}
+
+bool equals(HashMap map, const void *key1, const void *key2) {
+    if (key1 == key2) return true;
+    if (key1 == NULL || key2 == NULL) return false;
+    char ch1 = *(char *) key1, ch2 = *(char *) key2;
+    if (ch1 == ch2) return true;
+    return false;
+}
+
+void clear(HashMap map) {
+    for (int i = 0; i < map->listSize; i++) {
+        Entry entry = map->list[i].next;
+        while (entry != NULL) {
+            Entry next = entry->next;
+            free(entry);
+            entry = next;
+        }
+        map->list[i].next = NULL;
+    }
+    free(map->list);
+    map->list = NULL;
+    map->size = -1;
+    map->listSize = -1;
+    free(map);
+}
+*/
