@@ -7,6 +7,7 @@
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a < b ? a : b)
 
+// 另外的方法：单调递减栈
 int trap(int *height, int heightSize) {
     int ans = 0;
     int *actual = malloc(heightSize * sizeof(int));
