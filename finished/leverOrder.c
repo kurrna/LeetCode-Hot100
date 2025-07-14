@@ -1,12 +1,10 @@
 //
 // Created by Kurna on 25-7-9.
 //
-#include <tree.h>
+#include <../include/tree.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-struct TreeNode *createNode(int val);
 
 #define min(a, b) (a < b ? a : b)
 
@@ -60,11 +58,9 @@ int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes
 }
 
 void test() {
-    struct TreeNode *root = createNode(3);
-    root->left = createNode(9);
-    root->right = createNode(20);
-    root->right->left = createNode(15);
-    root->right->right = createNode(7);
+    int arr[] = {3, 9, 20, -1, -1, 15, 7};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    struct TreeNode *root = buildBinaryTree(arr, size, 0);
     int *returnSize = malloc(sizeof(int));
     int **returnColumnSizes = malloc(sizeof(int *));
     if (returnSize == NULL || returnColumnSizes == NULL) exit(1);
