@@ -3,7 +3,7 @@
 //
 #include <stdio.h>
 #include <stdlib.h>
-#include <tree.h>
+#include <../include/tree.h>
 
 #define max(a, b) (a > b ? a : b)
 #define min(a, b) (a < b ? a : b)
