@@ -3,7 +3,7 @@
 //
 #include <stdbool.h>
 #include <stdio.h>
-#include <tree.h>
+#include <../include/tree.h>
 
 // recursion
 // bool isSameTree(struct TreeNode *p, struct TreeNode *q) {
@@ -35,6 +35,7 @@ bool check(struct TreeNode *a, struct TreeNode *b) {
         tail = (tail + 1) % 99, q[tail] = b->left;
         size += 4;
     }
+    free(q);
     return true;
 }
 
