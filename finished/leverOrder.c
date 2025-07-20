@@ -60,7 +60,7 @@ int **levelOrder(struct TreeNode *root, int *returnSize, int **returnColumnSizes
 void test() {
     int arr[] = {3, 9, 20, -1, -1, 15, 7};
     int size = sizeof(arr) / sizeof(arr[0]);
-    struct TreeNode *root = buildBinaryTree(arr, size, 0);
+    struct TreeNode *root = arrToTree(arr, size, 0);
     int *returnSize = malloc(sizeof(int));
     int **returnColumnSizes = malloc(sizeof(int *));
     if (returnSize == NULL || returnColumnSizes == NULL) exit(1);

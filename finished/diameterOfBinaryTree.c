@@ -23,7 +23,7 @@ int diameterOfBinaryTree(struct TreeNode* root) {
 
 void test() {
     int arr[] = {1, 2};
-    struct TreeNode *root = buildBinaryTree(arr, sizeof(arr) / sizeof(arr[0]), 0);
+    struct TreeNode *root = arrToTree(arr, sizeof(arr) / sizeof(arr[0]), 0);
     int diameter = diameterOfBinaryTree(root);
     printf("%d", diameter);
 }
