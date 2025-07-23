@@ -32,10 +32,10 @@ static inline struct TreeNode *arrToTree(int arr[], int size, int i) {
     return node;
 }
 
-static inline int *treeToArr(struct TreeNode *root) {
+static inline int *treeToArr(struct TreeNode *root, int *returnSize) {
     struct TreeNode **queue = malloc(sizeof(struct TreeNode *) * 10);
     int *ret = malloc(sizeof(int) * 100);
-    int returnSize = 0;
+    *returnSize = 0;
     int head = 0, tail = -1, size = 0;
     tail = (tail + 1) % 9, size++;
     queue[tail] = root;
@@ -43,7 +43,7 @@ static inline int *treeToArr(struct TreeNode *root) {
     while (size > 0) {
         tempNode = queue[head];
         head = (head + 1) % 9, size--;
-        ret[returnSize++] = tempNode->val;
+        ret[(*returnSize)++] = tempNode->val;
         if (tempNode->left) {
             tail = (tail + 1) % 9, size++;
             queue[tail] = tempNode->left;
