@@ -1,5 +1,5 @@
 #include <iostream>
-#include <tree.hpp>
+#include <../include/tree.hpp>
 #include <unordered_map>
 
 class Solution {
