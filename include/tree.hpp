@@ -24,8 +24,26 @@ struct TreeNode {
 class TreeUtils {
 public:
     static TreeNode *arrToTree(const std::vector<int>& arr) {
-        if (arr.empty() || arr[0] == -1) return nullptr;
-        return arrToTreeHelper(arr, 0);
+        if (arr.empty() || arr[0] == INT_MIN) return nullptr;
+        auto *root = new TreeNode(arr[0]);
+        std::queue<TreeNode *> q;
+        q.push(root);
+        int index = 1;
+        while (index < arr.size() && !q.empty()) {
+            TreeNode *current = q.front();
+            q.pop();
+            if (index < arr.size() && arr[index] != INT_MIN) {
+                current->left = new TreeNode(arr[index]);
+                q.push(current->left);
+            }
+            index++;
+            if (index < arr.size() && arr[index] != INT_MIN) {
+                current->right = new TreeNode(arr[index]);
+                q.push(current->right);
+            }
+            index++;
+        }
+        return root;
     }
 
     static std::vector<int> treeToArr(const std::unique_ptr<TreeNode>& root) {
@@ -49,15 +67,6 @@ public:
         freeTree(root->right);
         delete root;
         root = nullptr;
-    }
-
-private:
-    static TreeNode *arrToTreeHelper(const std::vector<int>& arr, size_t index) {
-        if (index >= arr.size() || arr[index] == -1) return nullptr;
-        auto *node = new TreeNode(arr[index]);
-        node->left = arrToTreeHelper(arr, 2 * index + 1);
-        node->right = arrToTreeHelper(arr, 2 * index + 2);
-        return node;
     }
 };
 
