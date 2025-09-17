@@ -2,6 +2,7 @@
 dist/
 build/
 target/
+cmake-build-debug/
 
 # 忽略日志文件
 *.log

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <tree.hpp>
+#include <../include/tree.hpp>
 using namespace std;
 
 class Solution {
