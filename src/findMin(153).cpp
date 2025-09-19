@@ -1,0 +1,26 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int findMin(vector<int> &nums) {
+        int l = 0, r = nums.size() - 1;
+        while (l < r) {
+            int mid = (r - l) / 2 + l;
+            if (nums[mid] < nums[r]) {
+                r = mid;
+            } else {
+                l = mid + 1;
+            }
+        }
+        return nums[l];
+    }
+};
+
+int main() {
+    Solution sol;
+    vector nums = {3, 1, 2};
+    cout << sol.findMin(nums) << endl;
+    return 0;
+}
