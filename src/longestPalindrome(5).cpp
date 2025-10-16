@@ -50,39 +50,47 @@ public:
 
 class SolutionManacher {
 public:
+    // Manacher算法：线性时间查找最长回文子串
+    // 核心思想：利用回文的对称性，避免重复扩展
     string longestPalindrome(string s) {
         if (s.empty()) return "";
-        // 预处理：插入分隔符，避免奇偶长度区分
+        // Step 1: 预处理字符串，插入分隔符'#'，统一奇偶回文处理
+        // 例如：abc -> #a#b#c#
         string t = "#";
         for (char c : s) {
             t += c;
             t += "#";
         }
         int n = t.size();
-        vector<int> p(n, 0); // p[i]: 以i为中心的回文半径
-        int center = 0, right = 0, max_len = 0, start = 0;
+        vector<int> p(n, 0); // p[i]: 以t[i]为中心的回文半径（不含自身）
+        int center = 0, right = 0; // 当前回文的中心和右边界
+        int max_len = 0, start = 0; // 最长回文长度和起始位置
+        // Step 2: 主循环，遍历每个中心
         for (int i = 0; i < n; ++i) {
-            int mirror = 2 * center - i;
+            int mirror = 2 * center - i; // i关于center的对称点
+            // Step 3: 初始化p[i]
             if (i < right)
-                p[i] = min(right - i, p[mirror]);
-            // 尝试扩展
+                p[i] = min(right - i, p[mirror]); // 利用对称性减少扩展
+            // Step 4: 尝试向两边扩展
             int a = i + p[i] + 1, b = i - p[i] - 1;
             while (a < n && b >= 0 && t[a] == t[b]) {
                 ++p[i];
                 ++a;
                 --b;
             }
-            // 更新中心和右边界
+            // Step 5: 更新center和right
             if (i + p[i] > right) {
                 center = i;
                 right = i + p[i];
             }
-            // 记录最大长度
+            // Step 6: 记录最长回文
             if (p[i] > max_len) {
                 max_len = p[i];
+                // 计算原字符串中的起始位置
                 start = (i - max_len) / 2;
             }
         }
+        // Step 7: 返回最长回文子串
         return s.substr(start, max_len);
     }
 };
