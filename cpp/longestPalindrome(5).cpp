@@ -29,7 +29,7 @@ class Solution {
 class SolutionByDP {
 public:
     string longestPalindrome(string s) {
-        vector dp(s.size(), vector(s.size(), false));
+        vector<vector<int>> dp(s.size(), vector<int>(s.size(), false));
         int max_len = 1, pos = 0;
         for (int j = 0; j < s.size(); ++j) {
             for (int i = 0; i < j; ++i) {
