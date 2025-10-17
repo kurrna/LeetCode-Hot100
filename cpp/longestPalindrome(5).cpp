@@ -96,8 +96,8 @@ public:
 };
 
 int main() {
-    Solution sol;
-    auto s = "bb";
+    SolutionManacher sol;
+    auto s = "bcacbbd";
     cout << sol.longestPalindrome(s) << endl;
     return 0;
 }
