@@ -3,6 +3,8 @@ dist/
 build/
 target/
 cmake-build-debug/
+out/
+output/
 
 # 忽略日志文件
 *.log
@@ -10,6 +12,7 @@ cmake-build-debug/
 # 忽略IDE/编辑器自动生成的配置
 .idea/
 .vscode/
+.vs/
 *.iml
 
 # 忽略本地配置文件（如数据库连接信息）
