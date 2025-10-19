@@ -34,6 +34,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 # 同时匹配C和CPP源文件
 file(GLOB SRC_FILES CONFIGURE_DEPENDS
         "src/*.cpp"
+        "include/*.cpp"   # 新增：编译 include 下的实现文件（例如测试构造工具）
 )
 
 set(OUTPUT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/output)
@@ -41,4 +42,3 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${OUTPUT_DIR})
 file(MAKE_DIRECTORY ${OUTPUT_DIR})
 
 add_executable(main ${SRC_FILES})
-
