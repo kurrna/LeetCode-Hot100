@@ -10,7 +10,9 @@
 struct ListNode {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(NULL) {}
+    ListNode() : val(0), next(nullptr) {}
+    explicit ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
 class ListNodeUtils {
@@ -59,6 +61,10 @@ public:
 
     // Safely destroy two lists that share a common tail. Provide the intersection pointer to avoid double free.
     static void destroyTwoWithIntersection(ListNode* headA, ListNode* headB, ListNode* intersection);
+
+    // Demo helper: construct a sample pair of intersecting lists, print brief info, and return {headA, headB, intersection}.
+    // This is useful for small local tests.
+    static std::tuple<ListNode*, ListNode*, ListNode*> demoConstructIntersection();
 };
 
 #endif LIST_NODE

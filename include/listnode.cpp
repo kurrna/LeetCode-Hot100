@@ -4,6 +4,7 @@
 #include <tuple>
 #include <utility>
 #include <cassert>
+#include <iostream>
 
 // Helper to append a vector to an existing list and return new tail.
 static ListNode* appendValues(ListNode* tail, const std::vector<int>& vals) {
@@ -163,3 +164,44 @@ void ListNodeUtils::destroyTwoWithIntersection(ListNode* headA, ListNode* headB,
     }
 }
 
+// Demo helper implementation
+std::tuple<ListNode*, ListNode*, ListNode*> ListNodeUtils::demoConstructIntersection() {
+    using std::cout;
+    using std::endl;
+
+    // Example: A = [1,2,3,4,5,6], B = [9,8] then intersect at value 4 -> common tail [4,5,6]
+    std::vector<int> aPrefix = {1,2,3};
+    std::vector<int> bPrefix = {9,8};
+    std::vector<int> commonTail = {4,5,6};
+
+    auto pairHeads = constructWithIntersection(aPrefix, bPrefix, commonTail);
+    ListNode* headA = pairHeads.first;
+    ListNode* headB = pairHeads.second;
+
+    // Find intersection pointer by walking A until reaching first value of commonTail
+    ListNode* intersection = nullptr;
+    if (!commonTail.empty()) {
+        // locate first node in A whose val == commonTail[0] and which is address-equal to some node in B's tail
+        for (ListNode* p = headA; p != nullptr; p = p->next) {
+            if (p->val == commonTail[0]) { intersection = p; break; }
+        }
+    }
+
+    cout << "Demo construct intersection:\n";
+    auto printList = [&](ListNode* h) {
+        cout << "  [";
+        bool first = true;
+        for (ListNode* p = h; p != nullptr; p = p->next) {
+            if (!first) cout << ",";
+            first = false;
+            cout << p->val;
+        }
+        cout << "]\n";
+    };
+
+    cout << "List A: "; printList(headA);
+    cout << "List B: "; printList(headB);
+    cout << "Intersection node address: " << intersection << "\n";
+
+    return {headA, headB, intersection};
+}
