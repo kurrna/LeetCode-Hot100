@@ -2,9 +2,9 @@
 dist/
 build/
 target/
-cmake-build-debug/
 out/
 output/
+cmake-build*/
 
 # 忽略日志文件
 *.log

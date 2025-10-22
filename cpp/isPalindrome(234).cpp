@@ -2,8 +2,8 @@
 // Created by Kurna on 25-10-21.
 // Modern C++ implementation for LeetCode 234: Palindrome Linked List
 
+#include <../include/listnode.hpp>
 #include <iostream>
-#include <listnode.hpp>
 #include <vector>
 
 using std::cout;
