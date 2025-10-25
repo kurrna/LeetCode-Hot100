@@ -3,6 +3,7 @@
 #include <cassert>
 #include <utility>   // for std::pair
 #include <tuple>     // for std::tuple
+#include <iterator> // for std::forward_iterator_tag
 
 #define LIST_NODE
 #ifdef LIST_NODE
@@ -67,4 +68,49 @@ public:
     static std::tuple<ListNode*, ListNode*, ListNode*> demoConstructIntersection();
 };
 
+class ListIterator {
+public:
+    using iterator_category = std::forward_iterator_tag;
+    using value_type = int;
+    using difference_type = std::ptrdiff_t;
+    using pointer = int*;
+    using reference = int&;
+
+    ListIterator(ListNode* node) : current(node) {}
+
+    reference operator*() const { return current->val; }
+    pointer operator->() const { return &current->val; }
+
+    ListIterator& operator++() {
+        current = current->next;
+        return *this;
+    }
+
+    ListIterator operator++(int) {
+        ListIterator tmp = *this;
+        ++(*this);
+        return tmp;
+    }
+
+    bool operator==(const ListIterator& other) const {
+        return current == other.current;
+    }
+
+    bool operator!=(const ListIterator& other) const {
+        return !(*this == other);
+    }
+
+private:
+    ListNode* current;
+};
+
+class LinkedList {
+    ListNode* head;
+public:
+    explicit LinkedList(ListNode* h) : head(h) {}
+    ListIterator begin() { return {head}; }
+    ListIterator end() { return {nullptr}; }
+};
+
 #endif LIST_NODE
+
