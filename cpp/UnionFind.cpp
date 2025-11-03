@@ -10,7 +10,7 @@ private:
     vector<int> rank;
 
 public:
-    UnionFind(int n) {
+    explicit UnionFind(int n) {
         parent.resize(n);
         rank.resize(n, 0);
         // 初始化：每个元素的父节点是自身
