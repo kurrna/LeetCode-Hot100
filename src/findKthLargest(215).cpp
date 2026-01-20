@@ -26,8 +26,45 @@ public:
     }
 };
 
+class SolutionByHeap {
+public:
+    void heapify(vector<int> &nums, int i, int heapSize) {
+        int largest = i;
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+        if (left < heapSize && nums[left] > nums[largest]) {
+            largest = left;
+        }
+        if (right < heapSize && nums[right] > nums[largest]) {
+            largest = right;
+        }
+        if (largest != i) {
+            swap(nums[i], nums[largest]);
+            heapify(nums, largest, heapSize);
+        }
+    }
+
+    void buildMaxHeap(vector<int> &nums) {
+        int n = static_cast<int>(nums.size());
+        for (int i = n / 2 - 1; i >= 0; --i) {
+            heapify(nums, i, n);
+        }
+    }
+
+    int findKthLargest(vector<int> &nums, int k) {
+        int heapSize = static_cast<int>(nums.size());
+        buildMaxHeap(nums);
+        for (int i = 0; i < k - 1; ++i) {
+            swap(nums[0], nums[heapSize - 1]);
+            heapSize--;
+            heapify(nums, 0, heapSize);
+        }
+        return nums[0];
+    }
+};
+
 int main() {
-    Solution sol;
+    SolutionByHeap sol;
     vector<int> input = {3,2,1,5,6,4};
     int k = 2;
     int ans = sol.findKthLargest(input, k);
