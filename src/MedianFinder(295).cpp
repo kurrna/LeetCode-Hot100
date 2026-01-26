@@ -1,17 +1,116 @@
-#include <queue>
 #include <vector>
-#include <functional>
 #include <iostream>
+#include <stdexcept>
 
 //
 // Created by Kurna on 2026/1/24.
 //
+class MaxHeap {
+public:
+    MaxHeap() = default;
+
+    void push(int val) {
+        data.push_back(val);
+        siftUp(data.size() - 1);
+    }
+
+    void pop() {
+        if (data.empty()) return;
+        data[0] = data.back();
+        data.pop_back();
+        if (!data.empty()) siftDown(0);
+    }
+
+    int top() const {
+        if (data.empty()) throw std::runtime_error("MaxHeap is empty");
+        return data[0];
+    }
+
+    size_t size() const { return data.size(); }
+    bool empty() const { return data.empty(); }
+
+private:
+    std::vector<int> data;
+
+    void siftUp(size_t idx) {
+        while (idx > 0) {
+            size_t parent = (idx - 1) / 2;
+            if (data[parent] >= data[idx]) break;
+            std::swap(data[parent], data[idx]);
+            idx = parent;
+        }
+    }
+
+    void siftDown(size_t idx) {
+        size_t n = data.size();
+        while (true) {
+            size_t left = idx * 2 + 1;
+            size_t right = idx * 2 + 2;
+            size_t largest = idx;
+            if (left < n && data[left] > data[largest]) largest = left;
+            if (right < n && data[right] > data[largest]) largest = right;
+            if (largest == idx) break;
+            std::swap(data[idx], data[largest]);
+            idx = largest;
+        }
+    }
+};
+
+// Simple min-heap with only necessary operations
+class MinHeap {
+public:
+    MinHeap() = default;
+
+    void push(int val) {
+        data.push_back(val);
+        siftUp(data.size() - 1);
+    }
+
+    void pop() {
+        if (data.empty()) return;
+        data[0] = data.back();
+        data.pop_back();
+        if (!data.empty()) siftDown(0);
+    }
+
+    int top() const {
+        if (data.empty()) throw std::runtime_error("MinHeap is empty");
+        return data[0];
+    }
+
+    size_t size() const { return data.size(); }
+    bool empty() const { return data.empty(); }
+
+private:
+    std::vector<int> data;
+
+    void siftUp(size_t idx) {
+        while (idx > 0) {
+            size_t parent = (idx - 1) / 2;
+            if (data[parent] <= data[idx]) break;
+            std::swap(data[parent], data[idx]);
+            idx = parent;
+        }
+    }
+
+    void siftDown(size_t idx) {
+        size_t n = data.size();
+        while (true) {
+            size_t left = idx * 2 + 1;
+            size_t right = idx * 2 + 2;
+            size_t smallest = idx;
+            if (left < n && data[left] < data[smallest]) smallest = left;
+            if (right < n && data[right] < data[smallest]) smallest = right;
+            if (smallest == idx) break;
+            std::swap(data[idx], data[smallest]);
+            idx = smallest;
+        }
+    }
+};
+
 class MedianFinder {
 public:
-    MedianFinder()
-        : min_heap([](int a, int b) { return a > b; }) // lambda comparator for min-heap
-    {
-    }
+    MedianFinder() = default;
 
     void addNum(int num) {
         if (max_heap.empty() || num <= max_heap.top()) {
@@ -19,12 +118,15 @@ public:
         } else {
             min_heap.push(num);
         }
+        // balance sizes: max_heap can have at most one more element
         if (max_heap.size() > min_heap.size() + 1) {
-            min_heap.push(max_heap.top());
+            int v = max_heap.top();
             max_heap.pop();
+            min_heap.push(v);
         } else if (min_heap.size() > max_heap.size()) {
-            max_heap.push(min_heap.top());
+            int v = min_heap.top();
             min_heap.pop();
+            max_heap.push(v);
         }
     }
 
@@ -37,10 +139,8 @@ public:
     }
 
 private:
-    // max-heap for the lower half
-    std::priority_queue<int> max_heap;
-    // min-heap for the upper half, use std::function with a lambda comparator as requested
-    std::priority_queue<int, std::vector<int>, std::function<bool(int, int)> > min_heap;
+    MaxHeap max_heap; // lower half (max-heap)
+    MinHeap min_heap; // upper half (min-heap)
 };
 
 /**
