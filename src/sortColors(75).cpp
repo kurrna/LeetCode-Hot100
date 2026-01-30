@@ -9,17 +9,17 @@ class Solution {
 public:
     void sortColors(vector<int> &nums) {
         int n = static_cast<int>(nums.size());
-        int low = 0, mid = 0, high = n - 1;
-        while (low <= high) {
-            if (nums[low] == 0) {
-                swap(nums[low], nums[mid]);
-                low++;
-                mid++;
-            } else if (nums[low] == 1) {
-                low++;
+        int left = 0, right = n - 1, current = 0;
+        while (current <= right) {
+            if (nums[current] == 0) {
+                swap(nums[current], nums[left]);
+                left++;
+                current++;
+            } else if (nums[current] == 2) {
+                swap(nums[current], nums[right]);
+                right--;
             } else {
-                swap(nums[low], nums[high]);
-                high--;
+                current++;
             }
         }
     }
