@@ -1,0 +1,13 @@
+{
+  "leetcode.defaultLanguage": "cpp",
+  "leetcode.endpoint": "leetcode-cn",
+  "leetcode.workspaceFolder": "${workspaceFolder}",
+  "leetcode.filePath": {
+    "cpp": "leetcode/problems/${id}.${kebab-case-name}.${ext}"
+  },
+  "leetcode.editor.shortcuts": true,
+  "leetcode.hint.commandShortcut": false,
+  "files.associations": {
+    "*.tcc": "cpp"
+  }
+}

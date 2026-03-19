@@ -206,3 +206,24 @@ https://github.com/KurnaX/LeetCode-Hot100
 - **按分类突破**：优先解决同类型基础题（如哈希、双指针），再挑战困难题。
 - **总结规律**：每完成一类题目后，梳理核心算法思想（如滑动窗口的边界处理、动态规划的状态转移）。
 - **定期复盘**：对错误率高的题目（如困难题、中等题）进行二次练习，巩固薄弱环节。
+
+## 五、LeetCode VS Code 插件提交工作流
+
+本仓库已新增 LeetCode 插件专用目录与配置：
+
+- 题目文件默认生成到 `leetcode/problems/`
+- 默认语言为 `cpp`
+- 默认端点为 `leetcode-cn`
+
+首次使用建议：
+
+1. 安装并启用 `LeetCode` 扩展（仓库内 `.vscode/extensions.json` 已提供推荐扩展）。
+2. 执行 `LeetCode: Sign in` 登录。
+3. 在题目面板中执行 `LeetCode: Show Problem`，会自动在 `leetcode/problems/` 生成对应文件。
+4. 仅在 `// @lc code=start` 和 `// @lc code=end` 之间编写答案。
+5. 执行 `LeetCode: Test Solution` 本地测试，再执行 `LeetCode: Submit Solution` 提交。
+
+注意：
+
+- 提交时请保持文件头部 `@lc app=leetcode.cn id=... lang=cpp` 注释不变。
+- LeetCode 插件按当前活动编辑器文件进行测试与提交。

@@ -11,7 +11,9 @@ cmake-build*/
 
 # 忽略IDE/编辑器自动生成的配置
 .idea/
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .vs/
 *.iml
 
