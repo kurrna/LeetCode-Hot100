@@ -1,13 +1,25 @@
 {
-  "leetcode.defaultLanguage": "cpp",
-  "leetcode.endpoint": "leetcode-cn",
-  "leetcode.workspaceFolder": "${workspaceFolder}",
-  "leetcode.filePath": {
-    "cpp": "leetcode/problems/${id}.${kebab-case-name}.${ext}"
-  },
-  "leetcode.editor.shortcuts": true,
-  "leetcode.hint.commandShortcut": false,
-  "files.associations": {
-    "*.tcc": "cpp"
-  }
+  "java.project.sourcePaths": [
+    "."
+  ],
+  "java.project.outputPath": "classpath",
+  "java.project.resourceFilters": [
+    ".git",
+    "target",
+    "classpath",
+    "leetcode",
+    "README.md",
+    "hot100.md",
+    ".idea",
+    ".vscode",
+    ".vs",
+    ".gitignore"
+  ],
+  "java.import.exclusions": [
+    "**/target",
+    "**/classpath",
+    "**/leetcode"
+  ],
+  "java.format.settings.url": ".vscode/java-formatter.xml",
+  "java.project.referencedLibraries": []
 }
