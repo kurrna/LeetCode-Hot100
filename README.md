@@ -1,5 +1,5 @@
-> javac -d target *.java
-> java -cp target Solution
+> javac -d classpath *.java
+> java -cp classpath Solution
 
 ## 1.两数之和
 
@@ -50,3 +50,7 @@
 ## 15.三数之和
 
 - 双指针：排序后通过跳过重复的元素来防止出现重复的三元组，注意剪枝
+
+## 17.电话号码的字母组合
+
+- 回溯：使用 char[] 来存储每个数字对应的字母，递归构建组合
