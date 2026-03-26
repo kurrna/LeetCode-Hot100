@@ -79,6 +79,24 @@
 
 - 哑节点
 
+## 25.k 个一组翻转链表
+
+- 先检查剩余节点个数是否不足 k 个，若足够，则翻转 k 个
+  - 翻转链表
+
+    ```java
+    ListNode[] reverse(ListNode head, ListNode tail) {
+        ListNode cur = head, prev = null;
+        while (cur.next != null) {
+    	ListNode next = cur.next;
+       	cur.next = prev;
+    	prev = cur;
+    	cur = next;
+        }
+        return new ListNode[]{tail, next};
+    }
+    ```
+
 ## 37.解数独
 
 - 回溯：遍历数独每一个格子，用9个数字都试一遍后用'.'回溯
