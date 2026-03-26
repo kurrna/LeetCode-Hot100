@@ -101,6 +101,51 @@
 
 - 从后往前找第一个导致逆序的数 nums[i]（nums[i] < nums[i+1]），再从后往前找第一个比 nums[i] 大的数 nums[j]，交换这两个数后再使用双指针翻转 nums[i+1] 到结尾即可
 
+## 32.最长有效括号
+
+- 动态规划：dp[i] 表示前 i 个字符中最大有效括号长度
+
+  ```java
+  for (int i = 1; i < n; i++) {
+      if (s.charAt(i) == ')') {
+  	if (i > 0 && s.charAt(i-1) == '(') {
+  	    // 结束部分是一个"()"，长度+2
+  	    dp[i] = (i >= 2 ? dp[i-2] : 0) + 2;
+  	} else if (i - dp[i-1] > 0 && s.charAt(i - dp[i-1] -1) == '(') {
+  	    // 结尾部分是一个"))"，那么当 dp[i-dp[i-1]-1] 为 '('
+  	    // 那么相当于用一个更大的括号把之前最长的有效括号序列括起来，所以长度+2
+  	    // 最后还要加上这个新的大括号序列之前的
+  	    dp[i] = dp[i-1] + 2 + (i - dp[i-1] >=2 ? dp[i-dp[i-1]-2] : 0);
+  	}
+  	maxLen = Math.max(dp[i], maxLen);
+      }
+  }
+  ```
+- 栈：保持栈底元素为当前最后一个没有被匹配的右括号下标
+
+  ```java
+  stack.push(-1);
+  for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == '(') {
+  	stack.push(i);
+      } else {
+  	stack.pop();
+  	if (stack.isEmpty()) {
+  	    // 表示当前右括号为没有匹配的右括号
+  	    // 将其脚标放入栈中来表示最后一个没有被匹配的右括号下标
+  	    stack.push(i);
+  	} else {
+  	    // 若不为空则当前有效括号长度为当前下标减去栈顶元素下标
+  	    maxLen = Math.max(maxLen, i - stack.peek());
+  	}
+      }
+  }
+  ```
+- 使用 left 计算左括号数量，right 计算右括号数量
+
+  - 从左到右遍历，若 right 大于 left 则归零，若相等则更新 maxLen
+  - 从右到左遍历，若 left 大于 right 则归零，若相等则更新 maxLen
+
 ## 37.解数独
 
 - 回溯：遍历数独每一个格子，用9个数字都试一遍后用'.'回溯
