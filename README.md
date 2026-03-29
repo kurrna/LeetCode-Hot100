@@ -216,6 +216,17 @@
 
 - 将单词排序后当作哈希表的 key，分组后的list当作哈希表的 value
 
+## 50.pow(x, n)
+
+- 快速幂：注意边界条件（-2147483648的负数仍为-2147483648，因此要用long）
+  ```java
+  double quickMul(int x, long n) {
+      if (n == 0) return 1.0;
+      double y = quickMul(x, n);
+      return n % 2 == 0 ? y * y : y * y * x;
+  }
+  ```
+
 ## 51.n皇后
 
 - 回溯：遍历格子，若有效则填'Q'，递归调用检查下一行后'.'回溯
