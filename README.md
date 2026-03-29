@@ -197,6 +197,21 @@
   - `if (visited[i] || (i > 0 && nums[i-1] == nums[i] && visited[i-1])) continue;`
     两种剪枝最后答案相同，但是前者优于这种，因为，前者为同层剪枝，这种为非同层剪枝，在进入子树时才进行剪枝，时机较晚，性能更差
 
+## 48.旋转图像
+
+- 顺时针旋转90°：将矩阵分为四个区域，遍历单个区域内的点，每个点跟其他区域里的点交换位置，对于点 matrix[row][col]，其旋转 90°后对应点为 matrix[col][n-row-1]，因此对于点 matrix[i][j]，其余三个对应点分别为 matrix[j][n - i -1]、matrix[n - i - 1][n - j - 1]、matrix[n - j - 1][i]
+  ```java
+  for (int i = 0; i < n / 2; i++) {
+      for (int j = 0; j < (n + 1) / 2; j++) {
+  	int temp = matrix[i][j];
+  	matrix[i][j] = matrix[n - 1 - j][i];
+  	matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
+  	matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
+  	matrix[j][n - 1 - i] = temp;
+      }
+  }
+  ```
+
 ## 51.n皇后
 
 - 回溯：遍历格子，若有效则填'Q'，递归调用检查下一行后'.'回溯
