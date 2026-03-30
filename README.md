@@ -235,3 +235,7 @@
 ## 52.n皇后-ii
 
 - 回溯：使用位运算优化有效性判断
+
+## 53.最大子数组和
+
+- 动态规划：当前子数组和 pre = max(dp[i] + nums[i], nums[i])，最大子数组和 maxSum = max(maxSum, pre)
