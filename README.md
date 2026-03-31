@@ -239,3 +239,8 @@
 ## 53.最大子数组和
 
 - 动态规划：当前子数组和 pre = max(dp[i] + nums[i], nums[i])，最大子数组和 maxSum = max(maxSum, pre)
+
+## 54.螺旋矩阵
+
+- 模拟
+- 按层模拟
