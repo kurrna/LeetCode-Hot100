@@ -14,6 +14,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             while (!stk.isEmpty() && heights[stk.peek()] > heights[i]) {
                 int height = heights[stk.pop()];
+                // 相当于找 height 左边第一个比它矮的柱子和右边第一个比它矮的柱子
                 int width = stk.isEmpty() ? i : i - stk.peek() - 1;
                 maxArea = Math.max(maxArea, height * width);
             }
