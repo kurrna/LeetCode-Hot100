@@ -314,3 +314,7 @@
 ## 98.验证二叉搜索树
 
 - dfs
+
+## 101.对称二叉树
+
+- dfs：dfs(left.left, right.right) && dfs(left.right, right.left)
