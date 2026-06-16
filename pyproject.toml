@@ -1,7 +1,7 @@
 [project]
 name = "hot100"
 version = "0.1.0"
-description = "Add your description here"
+description = "LeetCode hot 100"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
@@ -11,6 +11,7 @@ dependencies = []
 # 格式：命令名 = 包名.文件名:函数名
 max_sliding_window = "leetcode.maxslidingwindow:main"
 search_matrix = "leetcode.searchmatrix:main"
+num_squares = "leetcode.numsquares:main"
 
 [build-system]
 requires = ["setuptools>=69"]
