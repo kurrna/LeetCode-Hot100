@@ -33,3 +33,11 @@ template.cpp
 *.class
 *.jar
 classpath
+
+# python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+.venv/
+*.egg-info/
