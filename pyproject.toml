@@ -10,6 +10,7 @@ dependencies = []
 [project.scripts]
 # 格式：命令名 = 包名.文件名:函数名
 max_sliding_window = "leetcode.maxslidingwindow:main"
+search_matrix = "leetcode.searchmatrix:main"
 
 [build-system]
 requires = ["setuptools>=69"]
