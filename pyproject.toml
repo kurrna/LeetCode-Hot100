@@ -12,6 +12,7 @@ dependencies = []
 max_sliding_window = "leetcode.maxslidingwindow:main"
 search_matrix = "leetcode.searchmatrix:main"
 num_squares = "leetcode.numsquares:main"
+move_zeroes = "leetcode.movezeroes:main"
 
 [build-system]
 requires = ["setuptools>=69"]
