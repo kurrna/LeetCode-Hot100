@@ -11,22 +11,17 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        slow, fast = 0, 0
-        while fast < len(nums):
-            while fast < len(nums) and nums[fast] == 0:
-                fast += 1
-            nums[slow] = nums[fast]
-            slow += 1
-            fast += 1
-        while slow < len(nums):
-            nums[slow] = 0
-            slow += 1
+        left, right = 0, 0
+        for right in range(len(nums)):
+            if nums[right] != 0:
+                nums[right], nums[left] = nums[left], nums[right]
+                left += 1
         
 # @lc code=end
 
 def main():
     sol = Solution()
-    nums = [0, 1, 0, 3, 12]
+    nums = [0, 1]
     sol.moveZeroes(nums)
     print(nums)
     
