@@ -13,8 +13,9 @@ max_sliding_window = "leetcode.maxslidingwindow:main"
 search_matrix = "leetcode.searchmatrix:main"
 num_squares = "leetcode.numsquares:main"
 move_zeroes = "leetcode.movezeroes:main"
-find_duplicate = "leetcode.findduplicate:main"
-median_finder = "leetcode.medianfinder:main"
+find_duplicate = "leetcode.findDuplicate:main"
+median_finder = "leetcode.mediainFinder:main"
+length_of_lis = "leetcode.lengthOfLIS:main"
 
 [build-system]
 requires = ["setuptools>=69"]
