@@ -9,13 +9,14 @@ dependencies = []
 
 [project.scripts]
 # 格式：命令名 = 包名.文件名:函数名
-max_sliding_window = "leetcode.maxslidingwindow:main"
-search_matrix = "leetcode.searchmatrix:main"
-num_squares = "leetcode.numsquares:main"
-move_zeroes = "leetcode.movezeroes:main"
+max_sliding_window = "leetcode.maxSlidingWindow:main"
+search_matrix = "leetcode.searchMatrix:main"
+num_squares = "leetcode.numSquares:main"
+move_zeroes = "leetcode.moveZeroes:main"
 find_duplicate = "leetcode.findDuplicate:main"
-median_finder = "leetcode.mediainFinder:main"
+median_finder = "leetcode.medianFinder:main"
 length_of_lis = "leetcode.lengthOfLIS:main"
+coin_change = "leetcode.coinChange:main"
 
 [build-system]
 requires = ["setuptools>=69"]
