@@ -18,6 +18,7 @@ median_finder = "leetcode.medianFinder:main"
 length_of_lis = "leetcode.lengthOfLIS:main"
 coin_change = "leetcode.coinChange:main"
 top_k_frequent = "leetcode.topKFrequent:main"
+decode_string = "leetcode.decodeString:main"
 
 [build-system]
 requires = ["setuptools>=69"]
