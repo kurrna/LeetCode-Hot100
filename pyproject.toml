@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "LeetCode hot 100"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "ruff>=0.15.20",
+]
 
 
 [project.scripts]
@@ -21,6 +23,7 @@ top_k_frequent = "leetcode.topKFrequent:main"
 decode_string = "leetcode.decodeString:main"
 can_partition = "leetcode.canPartition:main"
 path_sum_3 = "leetcode.pathSum3:main"
+find_anagrams = "leetcode.findAnagrams:main"
 
 [build-system]
 requires = ["setuptools>=69"]
