@@ -19,6 +19,7 @@ length_of_lis = "leetcode.lengthOfLIS:main"
 coin_change = "leetcode.coinChange:main"
 top_k_frequent = "leetcode.topKFrequent:main"
 decode_string = "leetcode.decodeString:main"
+can_partition = "leetcode.canPartition:main"
 
 [build-system]
 requires = ["setuptools>=69"]
