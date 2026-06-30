@@ -24,10 +24,10 @@ decode_string = "leetcode.decodeString:main"
 can_partition = "leetcode.canPartition:main"
 path_sum_3 = "leetcode.pathSum3:main"
 find_anagrams = "leetcode.findAnagrams:main"
+diameter_of_binary_tree = "leetcode.diameterOfBinaryTree:main"
 
 [build-system]
 requires = ["setuptools>=69"]
-build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
