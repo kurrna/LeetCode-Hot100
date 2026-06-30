@@ -25,6 +25,7 @@ can_partition = "leetcode.canPartition:main"
 path_sum_3 = "leetcode.pathSum3:main"
 find_anagrams = "leetcode.findAnagrams:main"
 diameter_of_binary_tree = "leetcode.diameterOfBinaryTree:main"
+subarray_sum = "leetcode.subarraySum:main"
 
 [build-system]
 requires = ["setuptools>=69"]
