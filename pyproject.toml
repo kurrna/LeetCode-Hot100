@@ -29,6 +29,7 @@ subarray_sum = "leetcode.subarraySum:main"
 daily_temperatures = "leetcode.dailyTemperatures:main"
 partition_labels = "leetcode.partitionLabels:main"
 oranges_rotting = "leetcode.orangesRotting:main"
+longest_common_subsequence = "leetcode.longestCommonSubsequence:main"
 
 [build-system]
 requires = ["setuptools>=69"]
