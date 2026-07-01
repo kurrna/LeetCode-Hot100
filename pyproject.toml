@@ -27,6 +27,7 @@ find_anagrams = "leetcode.findAnagrams:main"
 diameter_of_binary_tree = "leetcode.diameterOfBinaryTree:main"
 subarray_sum = "leetcode.subarraySum:main"
 daily_temperatures = "leetcode.dailyTemperatures:main"
+partition_labels = "leetcode.partitionLabels:main"
 
 [build-system]
 requires = ["setuptools>=69"]
