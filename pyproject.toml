@@ -31,6 +31,8 @@ partition_labels = "leetcode.partitionLabels:main"
 oranges_rotting = "leetcode.orangesRotting:main"
 longest_common_subsequence = "leetcode.longestCommonSubsequence:main"
 
+trap_rain_water = "leetcode.trapRainWater:main"
+
 [build-system]
 requires = ["setuptools>=69"]
 
